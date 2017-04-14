@@ -6,8 +6,10 @@ var express = require('express'),
     app.use(express.static('public'));
 
     app.use(bodyParser.urlencoded({ extended:true}));
-
-
+    
+    app.get('/', function (req, res) {
+  res.sendFile('views/index.html' , { root : __dirname});
+});
 
 
 
