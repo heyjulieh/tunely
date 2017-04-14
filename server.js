@@ -3,6 +3,8 @@ var express = require('express'),
 
     var app = express();
 
+    var controllers = require('./controllers');
+
     app.use(express.static('public'));
 
     app.use(bodyParser.urlencoded({ extended:true}));
@@ -12,11 +14,19 @@ var express = require('express'),
 });
 
 
+ app.get('/api/album', function (req, res) {
+  db.Albums.find(function (err, album) {
+      if (err) {
+      console. log(error +err.message);
+      res. status(500).send();
+  } else {
+  	res.json(album);
+     }
+   });
+});
 
 
-
-
-
+app.get('/api', controllers.api.index);
 
 
 
