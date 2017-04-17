@@ -33,25 +33,28 @@ $(document).ready(function() {
   // save song modal save button
   $('#saveSong').on('click', handleNewSongSubmit);
 
-  $('#albums').on('click', 'delete-album', handleDeleteAlbumClick);
+  // delete album when its delete button is clicked
+  $('#albums').on('click', '.delete-album', handleDeleteAlbumClick);
+
 });
 
+// when a delete button for an album is clicked
 function handleDeleteAlbumClick(e) {
-  var AlbumId = $(this).parents('.album').data('album-id'); // "5665ff1678209c64e51b4e7b"
-  console.log('id',AlbumId);
+  var albumId = $(this).parents('.album').data('album-id');
+  console.log('someone wants to delete album id=' + albumId );
   $.ajax({
-      url: '/api/albums/' + albumId,
-      method: 'DELETE',
-      success: handleDeleteAlbumSuccess
-    });
-  }
+    url: '/api/albums/' + albumId,
+    method: 'DELETE',
+    success: handleDeleteAlbumSuccess
+  });
+}
 
-  // callback after DELETE /api/albums/:id
-  function handleDeleteAlbumSuccess(data) {
-    var deletedAlbumId = data._id;
-    console.log('This album has been deleted: ', deletedAlbumId);
-    $('div[data-album-id=' + deletedAlbumId + ']').remove();
-  }
+// callback after DELETE /api/albums/:id
+function handleDeleteAlbumSuccess(data) {
+  var deletedAlbumId = data._id;
+  console.log('removing the following album from the page:', deletedAlbumId);
+  $('div[data-album-id=' + deletedAlbumId + ']').remove();
+}
 
 function renderMultipleAlbums(albums) {
   albums.forEach(function(album) {
@@ -126,13 +129,21 @@ function handleAddSongClick(e) {
   $('#songModal').modal();  // display the modal!
 }
 
+// when the add song button is clicked, display the modal
+function handleAddSongClick(e) {
+  console.log('add-song clicked!');
+  var currentAlbumId = $(this).closest('.album').data('album-id'); // "5665ff1678209c64e51b4e7b"
+  console.log('id',currentAlbumId);
+  $('#songModal').data('album-id', currentAlbumId);
+  $('#songModal').modal();  // display the modal!
+}
+
 // when the song modal submit button is clicked:
 function handleNewSongSubmit(e) {
   e.preventDefault();
   var $modal = $('#songModal');
   var $songNameField = $modal.find('#songName');
   var $trackNumberField = $modal.find('#trackNumber');
-
   // get data from modal fields
   // note the server expects the keys to be 'name', 'trackNumber' so we use those.
   var dataToPost = {

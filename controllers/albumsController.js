@@ -14,9 +14,8 @@ function create(req, res) {
   console.log('body', req.body);
 
   // split at comma and remove and trailing space
-  var genres = req.body.genres.split(',').map(function(item) {
-    return item.trim(); } );
-    req.body.genres = genres;
+  var genres = req.body.genres.split(',').map(function(item) { return item.trim(); } );
+  req.body.genres = genres;
 
   db.Album.create(req.body, function(err, album) {
     if (err) { console.log('error', err); }
@@ -38,8 +37,10 @@ function show(req, res) {
 // DELETE /api/albums/:albumId
 function destroy(req, res) {
   // find one album by id, delete it, and send it back as JSON
-  res.status(200);
-  console.log (albumId);
+  db.Album.findOneAndRemove({ _id: req.params.albumId }, function(err, foundAlbum){
+    // note you could send just send 204, but we're sending 200 and the deleted entity
+    res.json(foundAlbum);
+  });
 }
 
 // PUT or PATCH /api/albums/:albumId
