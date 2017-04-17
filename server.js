@@ -20,6 +20,10 @@ app.get('/api/albums', controllers.albums.index);
 
 app.post('/api/albums', controllers.albums.create);
 
+app.get('/api/albums/:album_id', controllers.albums.show);
+
+app.post('/api/albums/:album_id/songs', controllers.albumsSongs.create);
+
 
 app.listen(process.env.PORT|| 3000, function () {
   console.log('Listening at http://localhost:3000/');
