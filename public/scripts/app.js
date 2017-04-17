@@ -33,8 +33,25 @@ $(document).ready(function() {
   // save song modal save button
   $('#saveSong').on('click', handleNewSongSubmit);
 
-  $('#deleteAlbum').on('click', handleDeleteAlbumClick);
+  $('#albums').on('click', 'delete-album', handleDeleteAlbumClick);
 });
+
+function handleDeleteAlbumClick(e) {
+  var AlbumId = $(this).parents('.album').data('album-id'); // "5665ff1678209c64e51b4e7b"
+  console.log('id',AlbumId);
+  $.ajax({
+      url: '/api/albums/' + albumId,
+      method: 'DELETE',
+      success: handleDeleteAlbumSuccess
+    });
+  }
+
+  // callback after DELETE /api/albums/:id
+  function handleDeleteAlbumSuccess(data) {
+    var deletedAlbumId = data._id;
+    console.log('This album has been deleted: ', deletedAlbumId);
+    $('div[data-album-id=' + deletedAlbumId + ']').remove();
+  }
 
 function renderMultipleAlbums(albums) {
   albums.forEach(function(album) {
@@ -89,7 +106,7 @@ function renderAlbum(album) {
             <!-- end of album internal row -->
             <div class='panel-footer'>
                 <button class='btn btn-primary add-song'>Add Song</button>
-                <button class='btn btn-primary delete-album'>Delete Song</button>
+                <button class='btn btn-danger delete-album'>Delete Album</button>
             </div>
           </div>
         </div>
@@ -103,9 +120,9 @@ function renderAlbum(album) {
 // when the add song button is clicked, display the modal
 function handleAddSongClick(e) {
   console.log('add-song clicked!');
-  var currentAlbumId = $(this).closest('.album').data('albumId'); // "5665ff1678209c64e51b4e7b"
+  var currentAlbumId = $(this).closest('.album').data('album-id'); // "5665ff1678209c64e51b4e7b"
   console.log('id',currentAlbumId);
-  $('#songModal').data('albumId', currentAlbumId);
+  $('#songModal').data('album-id', currentAlbumId);
   $('#songModal').modal();  // display the modal!
 }
 
@@ -144,12 +161,4 @@ function handleNewSongSubmit(e) {
   }).error(function(err) {
     console.log('post to /api/albums/:albumId/songs resulted in error', err);
   });
-}
-function handleDeleteAlbumClick(e) {
-  var $deleteAlbumModal = $('#deleteAlbumModal');
-  console.log('delete-album clicked!');
-  var deleteAlbumId = $(this).closest('.album').data('albumId'); // "5665ff1678209c64e51b4e7b"
-  console.log('id',deleteAlbumId);
-  $('#deleteAlbumModal').data('albumId', deleteAlbumId);
-  $('#deleteAlbumModal').modal();  // display the modal!
 }

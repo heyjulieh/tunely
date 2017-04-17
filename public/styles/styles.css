@@ -5,7 +5,11 @@
   color: #EEE;
 }
 .jumbotron .container {
-  height: 350px;
+  height: 250px;
+  background-color: White;
+  color: black;
+  opacity: .50;
+  font-family: helvetica, sans-serif;
 }
 
 .inline-header {
