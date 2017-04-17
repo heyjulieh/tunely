@@ -86,6 +86,7 @@ function renderAlbum(album) {
             </div>
             <!-- end of album internal row -->
             <div class='panel-footer'>
+                <button class='btn btn-primary add-song'>Add Song</button>
             </div>
           </div>
         </div>
@@ -99,9 +100,9 @@ function renderAlbum(album) {
 // when the add song button is clicked, display the modal
 function handleAddSongClick(e) {
   console.log('add-song clicked!');
-  var currentAlbumId = $(this).closest('.album').data('album-id'); // "5665ff1678209c64e51b4e7b"
+  var currentAlbumId = $(this).closest('.album').data('albumId'); // "5665ff1678209c64e51b4e7b"
   console.log('id',currentAlbumId);
-  $('#songModal').data('album-id', currentAlbumId);
+  $('#songModal').data('albumId', currentAlbumId);
   $('#songModal').modal();  // display the modal!
 }
 
@@ -138,6 +139,6 @@ function handleNewSongSubmit(e) {
       renderAlbum(data);
     });
   }).error(function(err) {
-    console.log('post to /api/albums/:album_id/songs resulted in error', err);
+    console.log('post to /api/albums/:albumId/songs resulted in error', err);
   });
 }

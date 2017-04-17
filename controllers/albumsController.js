@@ -14,7 +14,7 @@ function create(req, res) {
   console.log('body', req.body);
 
   // split at comma and remove and trailing space
-  var genres = req.body.genres.split(', ').map(function(item) {
+  var genres = req.body.genres.split(',').map(function(item) {
     return item.trim(); } );
     req.body.genres = genres;
 
