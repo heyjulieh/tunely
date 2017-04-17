@@ -1,7 +1,11 @@
+var db = require('../models');
 
-
+// GET /api/albums
 function index(req, res) {
   // send back all albums as JSON
+  db.Album.find({}, function(err, allAlbums) {
+    res.json(allAlbums);
+  });
 }
 
 // POST /api/albums
@@ -25,15 +29,12 @@ function update(req, res) {
   // and send it back as JSON
 }
 
-module.exports = {
-  index: index
-};
 
-
+// export public methods here
 module.exports = {
-    index: index,
-    create: create,
-    show: show,
-    destroy: destroy,
-    update: update
+  index: index,
+  create: create,
+  show: show,
+  destroy: destroy,
+  update: update
 };

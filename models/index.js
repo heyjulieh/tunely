@@ -1,7 +1,4 @@
 var mongoose = require("mongoose");
-
-mongoose.Promise = global.Promise;
-
-mongoose.connect("mongodb://localhost/tunley");
+mongoose.connect("mongodb://localhost/tunely_test");
 
 module.exports.Album = require("./album.js");
