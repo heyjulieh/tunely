@@ -17,3 +17,27 @@
   vertical-align: baseline;
   margin-right: 12px;
 }
+
+.container {
+  height: 250px;
+  font-family: helvetica, sans-serif;
+}
+
+h2 {
+  font-family: helvetica, sans-serif;
+  font-size: 22px;
+}
+
+h4 {
+  font-family: helvetica, sans-serif;
+}
+
+.btn {
+  background-color: darkgrey;
+  border-color: darkgrey;
+}
+
+.btn-danger {
+  background-color: darkred;
+  border-color: darkred;
+}

@@ -98,8 +98,6 @@ $(document).ready(function() {
     // and then re-draw it with the updates ;-)
     renderAlbum(data);
 
-    // BONUS: scroll the change into view ;-)
-    $('[data-album-id=' + albumId + ']')[0].scrollIntoView();
   }
 // when a delete button for an album is clicked
 function handleDeleteAlbumClick(e) {
@@ -164,7 +162,7 @@ function renderAlbum(album) {
                   </li>
                   <li class="list-group-item">
                   <h4 class="inline-header">Songs:</h4>
-                  ${album.songsHtml}
+                  <span class='album-genres'${album.songsHtml}</span>
                   </li>
                 </ul>
               </div>
