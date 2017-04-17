@@ -27,16 +27,17 @@ $(document).ready(function() {
     $(this).trigger("reset");
   });
 
-  // catch and handle the click on an add song button
-  $('#albums').on('click', '.add-song', handleAddSongClick);
+    // catch and handle the click on an add song button
+    $('#albums').on('click', '.add-song', handleAddSongClick);
 
-  // save song modal save button
-  $('#saveSong').on('click', handleNewSongSubmit);
+    // save song modal save button
+    $('#saveSong').on('click', handleNewSongSubmit);
 
-  // delete album when its delete button is clicked
-  $('#albums').on('click', '.delete-album', handleDeleteAlbumClick);
-  $('#albums').on('click', '.edit-album', handleAlbumEditClick);
-  $('#albums').on('click', '.save-album', handleSaveChangesClick);
+    // delete album when its delete button is clicked
+    $('#albums').on('click', '.delete-album', handleDeleteAlbumClick);
+
+    $('#albums').on('click', '.edit-album', handleAlbumEditClick);
+    $('#albums').on('click', '.save-album', handleSaveChangesClick);
   });
 
   // when the edit button for an album is clicked
@@ -158,8 +159,8 @@ function renderAlbum(album) {
                     <span class='album-releaseDate'>${album.releaseDate}</span>
                   </li>
                   <li class="list-group-item">
-                    <h4 class='inline-header'>Genre:</h4>
-                    <span class='album-releaseDate'>${album.genres}</span>
+                    <h4 class='inline-header'>Genres:</h4>
+                    <span class='album-genres'>${album.genres}</span>
                   </li>
                   <li class="list-group-item">
                   <h4 class="inline-header">Songs:</h4>
@@ -182,15 +183,6 @@ function renderAlbum(album) {
     <!-- end one album -->
   `);
   $('#albums').prepend(albumHtml);
-}
-
-// when the add song button is clicked, display the modal
-function handleAddSongClick(e) {
-  console.log('add-song clicked!');
-  var currentAlbumId = $(this).closest('.album').data('album-id'); // "5665ff1678209c64e51b4e7b"
-  console.log('id',currentAlbumId);
-  $('#songModal').data('album-id', currentAlbumId);
-  $('#songModal').modal();  // display the modal!
 }
 
 // when the add song button is clicked, display the modal
