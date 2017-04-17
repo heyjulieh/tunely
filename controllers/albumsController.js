@@ -47,7 +47,12 @@ function destroy(req, res) {
 function update(req, res) {
   // find one album by id, update it based on request body,
   // and send it back as JSON
+  db.Album.findOneAndUpdate({ _id: req.params.albumId }, function(err, foundAlbum){
+    // note you could send just send 204, but we're sending 200 and the deleted entity
+    res.json(foundAlbum);
+  });
 }
+
 
 
 // export public methods here
