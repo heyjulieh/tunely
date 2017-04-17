@@ -24,6 +24,8 @@ app.get('/api/albums/:albumId', controllers.albums.show);
 
 app.post('/api/albums/:albumId/songs', controllers.albumsSongs.create);
 
+app.delete('/api/albums/:albumId', controllers.albums.destroy);
+
 
 app.listen(process.env.PORT|| 3000, function () {
   console.log('Listening at http://localhost:3000/');

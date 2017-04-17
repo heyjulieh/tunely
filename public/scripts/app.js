@@ -32,6 +32,8 @@ $(document).ready(function() {
 
   // save song modal save button
   $('#saveSong').on('click', handleNewSongSubmit);
+
+  $('#deleteAlbum').on('click', handleDeleteAlbumClick);
 });
 
 function renderMultipleAlbums(albums) {
@@ -87,6 +89,7 @@ function renderAlbum(album) {
             <!-- end of album internal row -->
             <div class='panel-footer'>
                 <button class='btn btn-primary add-song'>Add Song</button>
+                <button class='btn btn-primary delete-album'>Delete Song</button>
             </div>
           </div>
         </div>
@@ -141,4 +144,12 @@ function handleNewSongSubmit(e) {
   }).error(function(err) {
     console.log('post to /api/albums/:albumId/songs resulted in error', err);
   });
+}
+function handleDeleteAlbumClick(e) {
+  var $deleteAlbumModal = $('#deleteAlbumModal');
+  console.log('delete-album clicked!');
+  var deleteAlbumId = $(this).closest('.album').data('albumId'); // "5665ff1678209c64e51b4e7b"
+  console.log('id',deleteAlbumId);
+  $('#deleteAlbumModal').data('albumId', deleteAlbumId);
+  $('#deleteAlbumModal').modal();  // display the modal!
 }
