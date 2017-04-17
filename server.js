@@ -26,7 +26,7 @@ app.post('/api/albums/:albumId/songs', controllers.albumsSongs.create);
 
 app.delete('/api/albums/:albumId', controllers.albums.destroy);
 
-app.patch('/api/albums/:albumId', controllers.albums.update);
+app.put('/api/albums/:albumId', controllers.albums.update);
 
 
 app.listen(process.env.PORT|| 3000, function () {
