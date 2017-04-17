@@ -18,6 +18,7 @@ app.get('/api', controllers.api.index);
 
 app.get('/api/albums', controllers.albums.index);
 
+app.post('/api/albums', controllers.albums.create);
 
 
 app.listen(process.env.PORT|| 3000, function () {

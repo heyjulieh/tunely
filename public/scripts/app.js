@@ -9,10 +9,23 @@ console.log('Sanity Check !');
 /* hard-coded data! */
 $(document).ready(function() {
   console.log('app.js loaded!');
+
   $.ajax({
     method: 'GET',
     url: '/api/albums',
     success: renderMultipleAlbums
+  });
+
+
+  $('#album-form form').on('submit', function(e) {
+    e.preventDefault();
+    var formData = $(this).serialize();
+    console.log('formData', formData);
+    $.post('/api/albums', formData, function(album) {
+      console.log('album after POST', album);
+      renderAlbum(album);  //render the server's response
+    });
+    $(this).trigger("reset");
   });
 });
 
@@ -21,7 +34,6 @@ function renderMultipleAlbums(albums) {
     renderAlbum(album);
   });
 }
-
 
 // this function takes a single album and renders it to the page
 function renderAlbum(album) {
@@ -49,6 +61,10 @@ function renderAlbum(album) {
                   <li class="list-group-item">
                     <h4 class='inline-header'>Released date:</h4>
                     <span class='album-releaseDate'>${album.releaseDate}</span>
+                  </li>
+                  <li class="list-group-item">
+                    <h4 class='inline-header'>Genre:</h4>
+                    <span class='album-releaseDate'>${album.genres}</span>
                   </li>
                 </ul>
               </div>
